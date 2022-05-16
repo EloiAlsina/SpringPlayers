@@ -43,4 +43,8 @@ public class ServeiPlayers {
         if(repositoriPlayers.existsById(mod.getIdPlayer())) aux=repositoriPlayers.save(mod);
         return aux;
     }
+
+    public List<Player> consultarPlayers() {
+        return repositoriPlayers.findAll();
+    }
 }

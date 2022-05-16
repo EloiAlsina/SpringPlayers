@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequiredArgsConstructor
 public class ResponseEntityController {
@@ -24,8 +23,9 @@ public class ResponseEntityController {
     @PostMapping("/player")
     public ResponseEntity<?> crearPlayer(@RequestBody Player nou){
         Player res=serveiPlayers.afegirPlayer(nou);
-        return new ResponseEntity<Player>(res, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
+
     @PutMapping("/player")
     public ResponseEntity<?>modificarPlayer(Player mod){
         Player res = serveiPlayers.modificarPlayer(mod);
