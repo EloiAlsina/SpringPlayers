@@ -13,7 +13,6 @@ import java.util.List;
 public class ServeiUsuari {
 
     private final RepositoriUsuari repositoriUsuari;
-
     private final PasswordEncoder xifrat;
 
     public Usuari consultarPerUsername(String username) {
@@ -21,8 +20,6 @@ public class ServeiUsuari {
     }
 
     public Usuari crearNouUsuari(Usuari nouUsuari) {
-        //falta controlar que els 2 passwords del client coincideixen
-        //passar un UsuariCreacioDTO
         nouUsuari.setPassword(xifrat.encode(nouUsuari.getPassword()));
         repositoriUsuari.save(nouUsuari);
         return nouUsuari;

@@ -1,7 +1,9 @@
 package cat.itb.jugadorsspring.controladors;
 
 import cat.itb.jugadorsspring.model.entitats.Player;
+import cat.itb.jugadorsspring.model.entitats.Usuari;
 import cat.itb.jugadorsspring.model.serveis.ServeiPlayers;
+import cat.itb.jugadorsspring.model.serveis.ServeiUsuari;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.util.List;
 public class ControladorsPlayers {
 
     private final ServeiPlayers serveiPlayers;
+    private final ServeiUsuari serveiUsuari;
 
     @GetMapping("/players/{id}")
     public ResponseEntity<?> consultarPlayer(@PathVariable String id) {
@@ -22,7 +25,7 @@ public class ControladorsPlayers {
         else return ResponseEntity.ok(res);
     }
 
-    @GetMapping("/players/")
+    @GetMapping("/players")
     public ResponseEntity<?> consultarPlayers() {
         List<Player> res = serveiPlayers.consultarPlayers();
         if (res == null) return ResponseEntity.notFound().build();
@@ -52,10 +55,13 @@ public class ControladorsPlayers {
     }
 
     @PutMapping("/players")
-    public ResponseEntity<?>modificarPlayer(Player mod){
-        Player res = serveiPlayers.modificarPlayer(mod);
-        if(res == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(res);
+    public Player modificarPlayer(@RequestBody Player mod){
+        return serveiPlayers.modificarPlayer(mod);
+    }
+
+    @PostMapping("/crearusuari")
+    public Usuari crearNouUsuari(@RequestBody Usuari nou){
+        return serveiUsuari.crearNouUsuari(nou);
     }
 
 }
